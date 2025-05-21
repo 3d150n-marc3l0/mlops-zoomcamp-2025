@@ -172,3 +172,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+01-intro/.ipynb_checkpoints
+01-intro/data
+01-intro/duration-prediction.ipynb
+
