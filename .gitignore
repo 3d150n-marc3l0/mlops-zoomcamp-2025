@@ -177,3 +177,7 @@ cython_debug/
 01-intro/data
 01-intro/duration-prediction.ipynb
 
+02-experiment-tracking/.ipynb_checkpoints
+02-experiment-tracking/data
+02-experiment-tracking/duration-prediction.ipynb
+02-experiment-tracking/output
