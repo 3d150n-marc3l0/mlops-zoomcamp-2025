@@ -31,7 +31,7 @@ def taxi_training_pipeline(dataset_type: str, year: int, month: int):
     model, dv = train_model(df_train_processed, categorical)
 
     # Register model
-    register_model(model, dv, df)
+    register_model(model, dv, df_train_processed)
 
 if __name__ == "__main__":
     # python run_pipeline.py --dataset_type yellow --year 2023 --month 3
