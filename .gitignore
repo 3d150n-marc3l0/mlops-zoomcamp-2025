@@ -181,3 +181,8 @@ cython_debug/
 02-experiment-tracking/data
 02-experiment-tracking/duration-prediction.ipynb
 02-experiment-tracking/output
+
+
+03-orchestration/zenml/.env
+03-orchestration/zenml/mlflow_data
+03-orchestration/zenml/mysql-data
