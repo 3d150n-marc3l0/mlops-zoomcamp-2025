@@ -186,3 +186,10 @@ cython_debug/
 03-orchestration/zenml/.env
 03-orchestration/zenml/mlflow_data
 03-orchestration/zenml/mysql-data
+
+
+04-deployment/.ipynb_checkpoints
+04-deployment/homework/Data
+04-deployment/homework/output
+04-deployment/homework/Dockerfile
+04-deployment/homework/starter.py
