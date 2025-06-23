@@ -193,3 +193,9 @@ cython_debug/
 04-deployment/homework/output
 04-deployment/homework/Dockerfile
 04-deployment/homework/starter.py
+
+
+05-monitoring/.ipynb_checkpoints
+05-monitoring/data
+05-monitoring/models
+05-monitoring/workspace
