@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "==2.2.3"
+pyarrow = "==20.0.0"
+protobuf = "<4.21.0"
+entrypoints = "*"
+databricks-cli = "*"
+jupyterlab-git = "*"
+scikit-learn = "==1.6.1"
+sqlalchemy = "<2"
+matplotlib = "*"
+
+[dev-packages]
+jupyter = "*"
+
+[requires]
+python_version = "3.12"

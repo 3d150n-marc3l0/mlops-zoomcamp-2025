@@ -1,0 +1,14 @@
+services:
+  s3:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3 
+      - DEBUG=1
+      - DEFAULT_REGION=eu-west-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    # ro = read only
+    #volumes:
+    #  - /var/opt/my_website/dist:/app/data:ro

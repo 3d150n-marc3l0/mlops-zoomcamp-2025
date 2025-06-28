@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+mlflow = "==2.21.3"
+hyperopt = "*"
+zenml = "==0.83.0"
+pyarrow = "==19.0.1"
+requests = "*"
+
+[dev-packages]
+jupyter = "*"
+jupyterlab-git = "*"
+
+[requires]
+python_version = "3.12"
