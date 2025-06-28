@@ -199,3 +199,8 @@ cython_debug/
 05-monitoring/data
 05-monitoring/models
 05-monitoring/workspace
+
+06-best-practices/hw06
+
+aws
+awscliv2.zip

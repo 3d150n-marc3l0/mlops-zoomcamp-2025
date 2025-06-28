@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import os
 import sys
 import pickle
 import pandas as pd
@@ -22,13 +23,16 @@ def prepare_data(df):
     return df 
 
 def read_data(filename):
-    options = {
-        'client_kwargs': {
-            'endpoint_url': S3_ENDPOINT_URL
+    if filename.startswith("s3://"):
+        options = {
+            'client_kwargs': {
+                'endpoint_url': S3_ENDPOINT_URL
+            }
         }
-    }
-    df = pd.read_parquet(filename, storage_options=options)
-    
+        df = pd.read_parquet(filename, storage_options=options)
+    else:
+        df = pd.read_parquet(filename)
+
     # Preprocess
     df = prepare_data(df)
     
@@ -36,20 +40,23 @@ def read_data(filename):
 
 
 def save_data(df: pd.DataFrame, output_file: str):
-    options = {
-        'client_kwargs': {
-            'endpoint_url': S3_ENDPOINT_URL
+    if output_file.startswith("s3://"):
+        options = {
+            'client_kwargs': {
+                'endpoint_url': S3_ENDPOINT_URL
+            }
         }
-    }
 
-    df.to_parquet(
-        output_file,
-        engine='pyarrow',
-        compression=None,
-        index=False,
-        storage_options=options
-    
-    )
+        df.to_parquet(
+            output_file,
+            engine='pyarrow',
+            compression=None,
+            index=False,
+            storage_options=options
+        
+        )
+    else:
+        df.to_parquet(output_file, engine='pyarrow', index=False)
 
 def predict(dv, lr, df):
     dicts = df[categorical].to_dict(orient='records')
@@ -57,6 +64,7 @@ def predict(dv, lr, df):
     y_pred = lr.predict(X_val)
     
     print('predicted mean duration:', y_pred.mean())
+    print('predicted sum duration:', y_pred.sum())
     
     df_result = pd.DataFrame()
     df_result['ride_id'] = df['ride_id']
@@ -78,10 +86,14 @@ def get_output_path(year, month):
 
 
 def main(year, month):
+    print(f"year: {year}, month: {month}")
     # Setting up 
     input_file = get_input_path(year, month)
     #output_file = f'output/yellow_tripdata_{year:04d}-{month:02d}.parquet'
     output_file = get_output_path(year, month)
+
+    print(f"input_file : {input_file}")
+    print(f"output_file: {output_file}")
 
     # Load model
     with open('model.bin', 'rb') as f_in:

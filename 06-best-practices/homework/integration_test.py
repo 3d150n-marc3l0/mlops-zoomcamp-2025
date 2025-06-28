@@ -34,7 +34,7 @@ def save_data_to_s3(year = 2022, month= 1):
     columns = ['PULocationID', 'DOLocationID', 'tpep_pickup_datetime', 'tpep_dropoff_datetime']
     df_input = pd.DataFrame(data, columns=columns)
 
-    input_file = get_output_path(year, month)
+    input_file = get_input_path(year, month)
     print(f"input_file: {input_file}")
 
     df_input.to_parquet(

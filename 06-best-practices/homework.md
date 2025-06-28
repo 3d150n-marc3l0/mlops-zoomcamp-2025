@@ -242,8 +242,20 @@ df_input.to_parquet(
 
 
 ```bash
-aws --endpoint-url=http://localhost:4566 s3 ls nyc-duration/trip-data/
-2025-06-27 19:50:20       3620 yellow_tripdata_2023-01.parque
+export AWS_ACCESS_KEY_ID=test
+export AWS_SECRET_ACCESS_KEY=test
+export AWS_DEFAULT_REGION=eu-west-1
+```
+
+```bash
+python integration_test.py 
+options: {'client_kwargs': {'endpoint_url': 'http://localhost:4566'}}
+input_file: s3://nyc-duration/trip-data/yellow_tripdata_2023-01.parquet
+```
+
+```bash
+aws --endpoint-url=http://localhost:4566 s3 ls nyc-duration/in/
+2025-06-29 01:26:02       3620 2023-01.parquet
 ```
 
 What's the size of the file?
@@ -277,12 +289,29 @@ Now it saves the result to localstack.
 The only thing we need to do now is to read this data and 
 verify the result is correct. 
 
+
+```batch
+python batch.py 2023 1
+year: 2023, month: 1
+input_file : s3://nyc-duration/in/2023-01.parquet
+output_file: s3://nyc-duration/out/2023-01.parquet
+predicted mean duration: 18.138625226015364
+predicted sum duration: 36.27725045203073
+```
+
+```batch
+aws --endpoint-url=http://localhost:4566 s3 ls nyc-duration/out/
+2025-06-29 01:27:20       1972 2023-01.parquet
+```
+
+
 What's the sum of predicted durations for the test dataframe?
 
 * 13.08
-* 36.28
+* **36.28** <span style="font-size: 1.2em;">⬅️</span>
 * 69.28
 * 81.08
+
 
 
 ## Running the test (ungraded)
